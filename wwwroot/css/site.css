@@ -1,0 +1,49 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+#happyNewYear-div {
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+    #happyNewYear-div > div {
+        padding: 10px;
+        border-radius: 3px;
+        background: #FF7BEB;
+        display: inline-block;
+    }
+
+    #happyNewYear-div div > span {
+        padding: 15px;
+        border-radius: 3px;
+        background: #000000;
+        display: inline-block;
+    }
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
