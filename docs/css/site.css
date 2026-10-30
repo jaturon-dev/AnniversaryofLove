@@ -242,30 +242,6 @@ body {
     100% { transform: translateY(0); opacity: 1; }
 }
 
-/* ----- ยอดรวม ----- */
-.totals {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin: 20px 0 0;
-    padding-top: 18px;
-    border-top: 1px dashed var(--line);
-}
-
-.totals dt {
-    font-size: 0.82rem;
-    color: var(--muted);
-}
-
-.totals dd {
-    margin: 2px 0 0;
-    font-size: clamp(0.98rem, 3.4vw, 1.2rem);
-    font-weight: 700;
-    color: var(--rose-deep);
-    font-variant-numeric: tabular-nums;
-    word-break: break-all;
-}
-
 /* ----- แถบความคืบหน้า ----- */
 .progress {
     max-width: 560px;
@@ -358,13 +334,6 @@ body {
         font-size: clamp(1.4rem, 6vw, 1.8rem);
     }
 
-    .totals {
-        gap: 6px;
-    }
-
-    .totals dt {
-        font-size: 0.72rem;
-    }
 }
 
 /* ปิดแอนิเมชันสำหรับคนที่ตั้งค่าลดการเคลื่อนไหว */
