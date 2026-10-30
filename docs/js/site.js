@@ -1,5 +1,5 @@
 // Anniversary of Love
-// - นับเวลาที่รักกันมาแล้ว เป็นยอดรวม วัน / ชั่วโมง / นาที / วินาที
+// - นับเวลาที่รักกันมาแล้ว เป็นยอดรวม วัน / ชั่วโมง / นาที / วินาที (สไลด์อัตโนมัติ)
 // - นับถอยหลังสู่วันครบรอบปีถัดไป
 // แก้วันเริ่มคบได้ที่ data-start ของ <div id="anniversary"> ใน docs/index.html
 // ทุกอย่างคำนวณใหม่อัตโนมัติทุกปี
@@ -169,7 +169,78 @@
         thisYear.textContent = new Date().getFullYear();
     }
 
+    // สไลด์อัตโนมัติ: วัน → ชั่วโมง → นาที → วินาที
+    var makeSlider = function () {
+        var slider = root.querySelector('.slider');
+        if (!slider) {
+            return;
+        }
+        var track = slider.querySelector('.slides');
+        var dots = slider.querySelectorAll('.dot');
+        var count = slider.querySelectorAll('.slide').length;
+        var index = 0;
+        var timer = null;
+        var DELAY = 3000;
+
+        var go = function (i) {
+            index = (i + count) % count;
+            track.style.transform = 'translateX(' + (-index * 100) + '%)';
+            for (var d = 0; d < dots.length; d++) {
+                dots[d].classList.toggle('active', d === index);
+                dots[d].setAttribute('aria-current', d === index ? 'true' : 'false');
+            }
+        };
+
+        var start = function () {
+            stop();
+            timer = setInterval(function () { go(index + 1); }, DELAY);
+        };
+
+        var stop = function () {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+        };
+
+        for (var d = 0; d < dots.length; d++) {
+            (function (i) {
+                dots[i].addEventListener('click', function () {
+                    go(i);
+                    start();
+                });
+            })(d);
+        }
+
+        // ปัดซ้าย/ขวาบนมือถือ
+        var touchX = null;
+        slider.addEventListener('touchstart', function (e) {
+            touchX = e.touches[0].clientX;
+            stop();
+        }, { passive: true });
+        slider.addEventListener('touchend', function (e) {
+            if (touchX !== null) {
+                var dx = e.changedTouches[0].clientX - touchX;
+                if (Math.abs(dx) > 40) {
+                    go(index + (dx < 0 ? 1 : -1));
+                }
+            }
+            touchX = null;
+            start();
+        });
+
+        // หยุดชั่วคราวตอนเอาเมาส์ชี้หรือกด Tab มาที่สไลด์
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        go(0);
+        start();
+    };
+
     makeHearts();
+    makeSlider();
     update();
     setInterval(update, 1000);
 })();

@@ -213,16 +213,6 @@ body {
     font-weight: 500;
 }
 
-.clock-filled .unit {
-    background: linear-gradient(165deg, #ff86ad 0%, var(--rose) 55%, var(--rose-deep) 100%);
-    color: #fff;
-    box-shadow: 0 10px 22px -12px rgba(201, 47, 104, 0.7);
-}
-
-.clock-filled .label {
-    color: rgba(255, 255, 255, 0.85);
-}
-
 .clock-outline .unit {
     background: var(--blush-soft);
     border: 1.5px solid var(--blush);
@@ -242,15 +232,74 @@ body {
     100% { transform: translateY(0); opacity: 1; }
 }
 
-/* ----- ยอดรวมเวลาที่รักกัน (ตัวเลขยาว จัดเป็น 2x2) ----- */
-.clock-totals {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 600px;
+/* ----- สไลด์เวลาที่รักกัน ----- */
+.slider {
+    max-width: 520px;
+    margin: 18px auto 0;
 }
 
-.clock-totals .num {
-    font-size: clamp(1.3rem, 5.6vw, 2.4rem);
+.slider-viewport {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px -14px rgba(201, 47, 104, 0.7);
+    touch-action: pan-y;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 168px;
+    padding: 22px 12px 20px;
+    background: linear-gradient(165deg, #ff86ad 0%, var(--rose) 55%, var(--rose-deep) 100%);
+    color: #fff;
+}
+
+.slide .num {
+    font-size: clamp(2.5rem, 12vw, 4.4rem);
     white-space: nowrap;
+}
+
+.slide .label {
+    margin-top: 2px;
+    font-size: clamp(1.05rem, 4vw, 1.3rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: var(--blush);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.dot.active {
+    width: 26px;
+    background: var(--rose);
+}
+
+.dot:focus-visible {
+    outline: 2px solid var(--rose-deep);
+    outline-offset: 3px;
 }
 
 /* ----- แถบความคืบหน้า ----- */
@@ -357,6 +406,11 @@ body {
     .celebrate,
     .tick {
         animation: none;
+    }
+
+    .slides,
+    .dot {
+        transition: none;
     }
 
     .progress-fill {

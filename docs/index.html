@@ -41,11 +41,21 @@
         <section class="card card-together" aria-labelledby="together-title">
             <h2 id="together-title" class="card-title">เรารักกันมาแล้ว</h2>
 
-            <div class="clock clock-filled clock-totals">
-                <div class="unit"><span class="num js-up-days">0</span><span class="label">วัน</span></div>
-                <div class="unit"><span class="num js-up-hours">00</span><span class="label">ชั่วโมง</span></div>
-                <div class="unit"><span class="num js-up-minutes">00</span><span class="label">นาที</span></div>
-                <div class="unit"><span class="num js-up-seconds">00</span><span class="label">วินาที</span></div>
+            <div class="slider" aria-roledescription="carousel" aria-label="เวลาที่รักกันมาแล้ว">
+                <div class="slider-viewport">
+                    <div class="slides">
+                        <div class="slide" role="group" aria-roledescription="slide" aria-label="1 จาก 4"><span class="num js-up-days">0</span><span class="label">วัน</span></div>
+                        <div class="slide" role="group" aria-roledescription="slide" aria-label="2 จาก 4"><span class="num js-up-hours">0</span><span class="label">ชั่วโมง</span></div>
+                        <div class="slide" role="group" aria-roledescription="slide" aria-label="3 จาก 4"><span class="num js-up-minutes">0</span><span class="label">นาที</span></div>
+                        <div class="slide" role="group" aria-roledescription="slide" aria-label="4 จาก 4"><span class="num js-up-seconds">0</span><span class="label">วินาที</span></div>
+                    </div>
+                </div>
+                <div class="dots">
+                    <button type="button" class="dot" aria-label="วัน"></button>
+                    <button type="button" class="dot" aria-label="ชั่วโมง"></button>
+                    <button type="button" class="dot" aria-label="นาที"></button>
+                    <button type="button" class="dot" aria-label="วินาที"></button>
+                </div>
             </div>
         </section>
 
