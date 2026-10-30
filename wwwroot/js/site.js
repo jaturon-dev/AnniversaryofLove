@@ -1,56 +1,86 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// นับถอยหลังวันครบรอบ
+// วันเริ่มคบมาจาก appsettings.json (ส่วน "Anniversary") ผ่าน data-start ของ #anniversary
+// ทุกอย่างคำนวณใหม่อัตโนมัติทุกปี ไม่ต้องแก้วันที่ในโค้ดอีก
 
-// Write your JavaScript code.
+(function () {
+    'use strict';
 
-$(function () {
-    var initializeWatchClock = function (id, endtime) {
-        var clock = document.getElementById(id);
-        var daysSpan = clock.querySelector('.days');
-        var hoursSpan = clock.querySelector('.hours');
-        var minutesSpan = clock.querySelector('.minutes');
-        var secondsSpan = clock.querySelector('.seconds');
+    var root = document.getElementById('anniversary');
+    if (!root) {
+        return;
+    }
 
-        var updateWatchClock = function () {
-            var t = getTimeRemaining(endtime);
+    var match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$/.exec(root.dataset.start || '');
+    if (!match) {
+        return;
+    }
 
-            daysSpan.innerHTML = t.days;
-            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+    var startYear = +match[1];
+    var month = +match[2];
+    var day = +match[3];
+    var hour = +match[4];
+    var minute = +match[5];
+    var second = +match[6];
+    var offsetMinutes = (match[7] === '-' ? -1 : 1) * (+match[8] * 60 + +match[9]);
+    var DAY_MS = 24 * 60 * 60 * 1000;
 
-            if (t.total <= 0) {
-                clearInterval(interval);
-            }
+    var thaiMonths = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+        'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+
+    // เวลา (ms) ของวันครบรอบปีที่ n ในเขตเวลาเดียวกับวันเริ่มคบ
+    var anniversaryOf = function (n) {
+        var year = startYear + n;
+        var daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate(); // กัน 29 ก.พ.
+        return Date.UTC(year, month - 1, Math.min(day, daysInMonth), hour, minute, second) - offsetMinutes * 60000;
+    };
+
+    var startMs = anniversaryOf(0);
+    var celebrate = root.querySelector('.celebrate');
+
+    var setText = function (selector, value) {
+        var nodes = root.querySelectorAll(selector);
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].textContent = value;
+        }
+    };
+
+    var pad = function (n) {
+        return ('0' + n).slice(-2);
+    };
+
+    var thaiDate = function (ms) {
+        var d = new Date(ms + offsetMinutes * 60000); // อ่านค่าแบบ UTC = เวลาท้องถิ่นของวันเริ่มคบ
+        return d.getUTCDate() + ' ' + thaiMonths[d.getUTCMonth()] + ' ' + (d.getUTCFullYear() + 543);
+    };
+
+    var updateWatchClock = function () {
+        var now = Date.now();
+
+        var years = 0;
+        while (anniversaryOf(years + 1) <= now) {
+            years++;
         }
 
-        //Update clock Watch!
-        updateWatchClock();
-        var interval = setInterval(updateWatchClock, 1000);
+        var last = anniversaryOf(years);
+        var next = anniversaryOf(years + 1);
+        var totalSeconds = Math.max(0, Math.floor((next - now) / 1000));
+
+        setText('.days', Math.floor(totalSeconds / 86400));
+        setText('.hours', pad(Math.floor(totalSeconds / 3600) % 24));
+        setText('.minutes', pad(Math.floor(totalSeconds / 60) % 60));
+        setText('.seconds', pad(totalSeconds % 60));
+
+        setText('.js-years', years);
+        setText('.js-years-label', years === 1 ? 'Year' : 'Years');
+        setText('.js-next-year', years + 1);
+        setText('.js-next-date', thaiDate(next));
+        setText('.js-total-days', Math.max(0, Math.floor((now - startMs) / DAY_MS)).toLocaleString('en-US'));
+
+        if (celebrate) {
+            celebrate.hidden = !(years > 0 && now - last < DAY_MS);
+        }
     };
 
-    var getTimeRemaining = function (endtime) {
-        var t = Date.parse(endtime) - Date.parse(new Date());
-        var seconds = Math.floor((t / 1000) % 60);
-        var minutes = Math.floor((t / 1000 / 60) % 60);
-        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-        var days = Math.floor(t / (1000 * 60 * 60 * 24));
-
-        return {
-            'total': t,
-            'days': days,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds
-        };
-    };
-
-    //Calculation for happy new year!
-    //nextYear = new Date(new Date().getFullYear() + 1, 0, 1);
-    today = Date.parse(new Date());
-    newYearDay = new Date("May 23, 2023 15:10:00").getTime();
-    remaningDT = newYearDay - today;
-    remanning = new Date(Date.parse(new Date()) + remaningDT);
-
-    initializeWatchClock('happyNewYear-div', remanning);
-});
+    updateWatchClock();
+    setInterval(updateWatchClock, 1000);
+})();

@@ -17,6 +17,44 @@ body {
     text-align: center;
     font-family: sans-serif;
     font-weight: 100;
+    margin-bottom: 60px; /* เว้นที่ให้ footer ที่ติดล่างจอ */
+}
+
+.sriracha {
+    font-family: 'Sriracha', cursive;
+}
+
+.text-soft {
+    color: #B0B0B0;
+}
+
+.text-love {
+    color: #FF7BEB;
+}
+
+.countdown-caption {
+    color: #8a8a8a;
+    margin-bottom: 12px;
+}
+
+.celebrate {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #FFE6FA;
+    color: #D63AB9;
+    animation: celebrate-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes celebrate-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .celebrate {
+        animation: none;
+    }
 }
 
 #happyNewYear-div {
@@ -30,6 +68,7 @@ body {
 
     #happyNewYear-div > div {
         padding: 10px;
+        margin: 2px;
         border-radius: 3px;
         background: #FF7BEB;
         display: inline-block;
@@ -40,6 +79,8 @@ body {
         border-radius: 3px;
         background: #000000;
         display: inline-block;
+        min-width: 2.2em;
+        font-variant-numeric: tabular-nums;
     }
 
 .smalltext {
@@ -47,3 +88,21 @@ body {
     font-size: 16px;
 }
 
+/* จอมือถือ: ย่อกล่องนับถอยหลังให้อยู่ในบรรทัดเดียว */
+@media (max-width: 480px) {
+    #happyNewYear-div {
+        font-size: 20px;
+    }
+
+        #happyNewYear-div > div {
+            padding: 6px;
+        }
+
+        #happyNewYear-div div > span {
+            padding: 10px 6px;
+        }
+
+    .smalltext {
+        font-size: 12px;
+    }
+}
