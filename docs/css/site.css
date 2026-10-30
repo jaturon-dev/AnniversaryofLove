@@ -242,6 +242,17 @@ body {
     100% { transform: translateY(0); opacity: 1; }
 }
 
+/* ----- ยอดรวมเวลาที่รักกัน (ตัวเลขยาว จัดเป็น 2x2) ----- */
+.clock-totals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 600px;
+}
+
+.clock-totals .num {
+    font-size: clamp(1.3rem, 5.6vw, 2.4rem);
+    white-space: nowrap;
+}
+
 /* ----- แถบความคืบหน้า ----- */
 .progress {
     max-width: 560px;
@@ -330,7 +341,7 @@ body {
     }
 
     /* ช่อง "วัน" มีตัวเลขยาวกว่าช่องอื่น */
-    .unit:first-child .num {
+    .clock-outline .unit:first-child .num {
         font-size: clamp(1.4rem, 6vw, 1.8rem);
     }
 

@@ -1,5 +1,5 @@
 // Anniversary of Love
-// - นับเวลาที่รักกันมาแล้ว (วัน ชั่วโมง นาที วินาที)
+// - นับเวลาที่รักกันมาแล้ว เป็นยอดรวม วัน / ชั่วโมง / นาที / วินาที
 // - นับถอยหลังสู่วันครบรอบปีถัดไป
 // แก้วันเริ่มคบได้ที่ data-start ของ <div id="anniversary"> ใน docs/index.html
 // ทุกอย่างคำนวณใหม่อัตโนมัติทุกปี
@@ -113,7 +113,11 @@
         var elapsed = Math.max(0, now - startMs);
 
         // เรารักกันมาแล้ว
-        showClock('up', elapsed);
+        // แต่ละช่องเป็นยอดรวมทั้งหมดของหน่วยนั้น
+        setText('.js-up-days', fmt(Math.floor(elapsed / DAY)));
+        setText('.js-up-hours', fmt(Math.floor(elapsed / HOUR)));
+        setText('.js-up-minutes', fmt(Math.floor(elapsed / MINUTE)));
+        setTick('.js-up-seconds', fmt(Math.floor(elapsed / SECOND)));
 
         // นับถอยหลัง
         showClock('down', next - now);
