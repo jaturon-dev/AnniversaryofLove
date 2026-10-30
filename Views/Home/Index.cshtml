@@ -1,27 +1,43 @@
-﻿@{
+﻿@model AnniversaryofLove.Models.AnniversaryViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Aniversary 6 Year!!!</h1>
-  <div id="happyNewYear-div">
-    <div>
-      <span class="days"></span><div class="smalltext">Days</div>
-    </div>
-    <div>
-      <span class="hours"></span><div class="smalltext">Hours</div>
-    </div>
-    <div>
-      <span class="minutes"></span><div class="smalltext">Minutes</div>
-    </div>
-    <div>
-      <span class="seconds"></span><div class="smalltext">Seconds</div>
-    </div>
-  </div>
-<div class="pt-3">
-    <h4 style="font-family: 'Sriracha', cursive">คุณโป้งรักคุณหมีติดต่อกัน 6 ปีแล้ว</h4>
-    <p style="color:#B0B0B0; font-family: 'Sriracha', cursive;">(และจะรักตลอดไป)</p>
-</div>
+<div id="anniversary" data-start="@Model.StartDateIso">
 
-<div class="pt-5">
-    <h1 style="font-family: 'Sriracha', cursive; color: #FF7BEB;">มานับปีที่ 7 ไปด้วยกันนะ</h1>
+    <div class="celebrate" @(Model.IsCelebrating ? "" : "hidden")>
+        <h2 class="sriracha">🎉 สุขสันต์วันครบรอบ <span class="js-years">@Model.YearsTogether</span> ปี 🎉</h2>
+    </div>
+
+    <h1>Anniversary <span class="js-years">@Model.YearsTogether</span> <span class="js-years-label">@Model.YearsLabel</span>!!!</h1>
+
+    <p class="countdown-caption sriracha">
+        นับถอยหลังถึงวันครบรอบปีที่ <span class="js-next-year">@Model.NextYear</span>
+        · <span class="js-next-date">@Model.NextAnniversaryThai</span>
+    </p>
+
+    <div id="happyNewYear-div">
+        <div>
+            <span class="days">@((int)Model.TimeLeft.TotalDays)</span><div class="smalltext">Days</div>
+        </div>
+        <div>
+            <span class="hours">@Model.TimeLeft.Hours.ToString("00")</span><div class="smalltext">Hours</div>
+        </div>
+        <div>
+            <span class="minutes">@Model.TimeLeft.Minutes.ToString("00")</span><div class="smalltext">Minutes</div>
+        </div>
+        <div>
+            <span class="seconds">@Model.TimeLeft.Seconds.ToString("00")</span><div class="smalltext">Seconds</div>
+        </div>
+    </div>
+
+    <div class="pt-3">
+        <h4 class="sriracha">@(Model.Options.Lover)รัก@(Model.Options.Beloved)ติดต่อกัน <span class="js-years">@Model.YearsTogether</span> ปีแล้ว</h4>
+        <p class="sriracha text-soft">(และจะรักตลอดไป)</p>
+        <p class="sriracha text-soft">รวมทั้งหมด <span class="js-total-days">@Model.DaysTogetherText</span> วัน</p>
+    </div>
+
+    <div class="pt-5">
+        <h1 class="sriracha text-love">มานับปีที่ <span class="js-next-year">@Model.NextYear</span> ไปด้วยกันนะ</h1>
+    </div>
 </div>
