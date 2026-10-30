@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anniversary of Love</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-brand" href="./">Anniversary of Love</a>
+    </header>
+
+    <main>
+        <!-- วันเริ่มคบ: แก้ที่ data-start (ใส่ timezone ด้วย เช่น +07:00) -->
+        <div id="anniversary" data-start="2016-05-23T15:10:00+07:00">
+
+            <div class="celebrate" hidden>
+                <h2 class="sriracha">🎉 สุขสันต์วันครบรอบ <span class="js-years"></span> ปี 🎉</h2>
+            </div>
+
+            <h1>Anniversary <span class="js-years"></span> <span class="js-years-label">Years</span>!!!</h1>
+
+            <p class="countdown-caption sriracha">
+                นับถอยหลังถึงวันครบรอบปีที่ <span class="js-next-year"></span>
+                · <span class="js-next-date"></span>
+            </p>
+
+            <div id="happyNewYear-div">
+                <div>
+                    <span class="days">0</span><div class="smalltext">Days</div>
+                </div>
+                <div>
+                    <span class="hours">00</span><div class="smalltext">Hours</div>
+                </div>
+                <div>
+                    <span class="minutes">00</span><div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                    <span class="seconds">00</span><div class="smalltext">Seconds</div>
+                </div>
+            </div>
+
+            <div class="pt-3">
+                <h4 class="sriracha">คุณโป้งรักคุณหมีติดต่อกัน <span class="js-years"></span> ปีแล้ว</h4>
+                <p class="sriracha text-soft">(และจะรักตลอดไป)</p>
+                <p class="sriracha text-soft">รวมทั้งหมด <span class="js-total-days"></span> วัน</p>
+            </div>
+
+            <div class="pt-5">
+                <h1 class="sriracha text-love">มานับปีที่ <span class="js-next-year"></span> ไปด้วยกันนะ</h1>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        2016 - <span id="this-year">2026</span> · Really Love You ❤
+    </footer>
+
+    <script src="js/site.js"></script>
+</body>
+</html>

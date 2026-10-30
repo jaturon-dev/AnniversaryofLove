@@ -1,0 +1,186 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 100;
+    margin-bottom: 60px; /* เว้นที่ให้ footer ที่ติดล่างจอ */
+}
+
+.sriracha {
+    font-family: 'Sriracha', cursive;
+}
+
+.text-soft {
+    color: #B0B0B0;
+}
+
+.text-love {
+    color: #FF7BEB;
+}
+
+.countdown-caption {
+    color: #8a8a8a;
+    margin-bottom: 12px;
+}
+
+.celebrate {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #FFE6FA;
+    color: #D63AB9;
+    animation: celebrate-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes celebrate-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .celebrate {
+        animation: none;
+    }
+}
+
+#happyNewYear-div {
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+    #happyNewYear-div > div {
+        padding: 10px;
+        margin: 2px;
+        border-radius: 3px;
+        background: #FF7BEB;
+        display: inline-block;
+    }
+
+    #happyNewYear-div div > span {
+        padding: 15px;
+        border-radius: 3px;
+        background: #000000;
+        display: inline-block;
+        min-width: 2.2em;
+        font-variant-numeric: tabular-nums;
+    }
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+/* จอมือถือ: ย่อกล่องนับถอยหลังให้อยู่ในบรรทัดเดียว */
+@media (max-width: 480px) {
+    #happyNewYear-div {
+        font-size: 20px;
+    }
+
+        #happyNewYear-div > div {
+            padding: 6px;
+        }
+
+        #happyNewYear-div div > span {
+            padding: 10px 6px;
+        }
+
+    .smalltext {
+        font-size: 12px;
+    }
+}
+
+/* ส่วน navbar/footer (เดิมมาจาก Bootstrap + _Layout.cshtml.css) */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #212529;
+}
+
+.site-header {
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    margin-bottom: 1rem;
+    padding: .5rem 1rem;
+    text-align: left;
+}
+
+.site-brand {
+    font-size: 1.25rem;
+    color: rgba(0, 0, 0, .9);
+    text-decoration: none;
+}
+
+main {
+    padding: 0 12px 1rem;
+}
+
+h1 {
+    font-size: calc(1.375rem + 1.5vw);
+    font-weight: 500;
+    margin: 0 0 .5rem;
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+h2 {
+    font-size: calc(1.325rem + .9vw);
+    font-weight: 500;
+    margin: 0;
+}
+
+h4 {
+    font-size: calc(1.275rem + .3vw);
+    font-weight: 500;
+    margin: 0 0 .5rem;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+.pt-3 {
+    padding-top: 1rem;
+}
+
+.pt-5 {
+    padding-top: 3rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    border-top: 1px solid #e5e5e5;
+    color: #6c757d;
+}
+
+[hidden] {
+    display: none !important;
+}
