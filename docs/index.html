@@ -3,63 +3,90 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anniversary of Love</title>
+    <title>Anniversary of Love · คุณโป้ง ♥ คุณหมี</title>
+    <meta name="description" content="นับเวลาที่คุณโป้งกับคุณหมีรักกัน และนับถอยหลังสู่วันครบรอบปีถัดไป" />
+    <meta name="theme-color" content="#fff6f3" />
     <link rel="icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
-    <header class="site-header">
-        <a class="site-brand" href="./">Anniversary of Love</a>
-    </header>
+    <!-- หัวใจลอยพื้นหลัง (สร้างด้วย JS) -->
+    <div class="hearts-bg" aria-hidden="true"></div>
 
-    <main>
-        <!-- วันเริ่มคบ: แก้ที่ data-start (ใส่ timezone ด้วย เช่น +07:00) -->
-        <div id="anniversary" data-start="2016-05-23T15:10:00+07:00">
+    <!--
+        ตั้งค่าทั้งหมดอยู่ตรงนี้
+        data-start : วันและเวลาที่เริ่มคบ (ใส่ timezone ด้วย เช่น +07:00)
+    -->
+    <div id="anniversary" class="page" data-start="2016-05-23T15:10:00+07:00">
 
-            <div class="celebrate" hidden>
-                <h2 class="sriracha">🎉 สุขสันต์วันครบรอบ <span class="js-years"></span> ปี 🎉</h2>
-            </div>
-
-            <h1>Anniversary <span class="js-years"></span> <span class="js-years-label">Years</span>!!!</h1>
-
-            <p class="countdown-caption sriracha">
-                นับถอยหลังถึงวันครบรอบปีที่ <span class="js-next-year"></span>
-                · <span class="js-next-date"></span>
-            </p>
-
-            <div id="happyNewYear-div">
-                <div>
-                    <span class="days">0</span><div class="smalltext">Days</div>
-                </div>
-                <div>
-                    <span class="hours">00</span><div class="smalltext">Hours</div>
-                </div>
-                <div>
-                    <span class="minutes">00</span><div class="smalltext">Minutes</div>
-                </div>
-                <div>
-                    <span class="seconds">00</span><div class="smalltext">Seconds</div>
-                </div>
-            </div>
-
-            <div class="pt-3">
-                <h4 class="sriracha">คุณโป้งรักคุณหมีติดต่อกัน <span class="js-years"></span> ปีแล้ว</h4>
-                <p class="sriracha text-soft">(และจะรักตลอดไป)</p>
-                <p class="sriracha text-soft">รวมทั้งหมด <span class="js-total-days"></span> วัน</p>
-            </div>
-
-            <div class="pt-5">
-                <h1 class="sriracha text-love">มานับปีที่ <span class="js-next-year"></span> ไปด้วยกันนะ</h1>
-            </div>
+        <div class="celebrate" role="status" hidden>
+            🎉 สุขสันต์วันครบรอบ <span class="js-years"></span> ปี 🎉
         </div>
-    </main>
 
-    <footer class="footer">
-        2016 - <span id="this-year">2026</span> · Really Love You ❤
-    </footer>
+        <header class="hero">
+            <p class="eyebrow">Anniversary of Love</p>
+            <h1 class="hero-title">
+                <span class="hero-number js-years">10</span>
+                <span class="hero-unit js-years-label">Years</span>
+            </h1>
+            <p class="hero-names">
+                คุณโป้ง <span class="beat" aria-label="รัก">♥</span> คุณหมี
+            </p>
+            <p class="hero-since">ตั้งแต่ <span class="js-start-date"></span></p>
+        </header>
+
+        <section class="card card-together" aria-labelledby="together-title">
+            <h2 id="together-title" class="card-title">เรารักกันมาแล้ว</h2>
+
+            <div class="clock clock-filled">
+                <div class="unit"><span class="num js-up-days">0</span><span class="label">วัน</span></div>
+                <div class="unit"><span class="num js-up-hours">00</span><span class="label">ชั่วโมง</span></div>
+                <div class="unit"><span class="num js-up-minutes">00</span><span class="label">นาที</span></div>
+                <div class="unit"><span class="num js-up-seconds">00</span><span class="label">วินาที</span></div>
+            </div>
+
+            <dl class="totals">
+                <div><dt>รวมเป็นชั่วโมง</dt><dd class="js-total-hours">0</dd></div>
+                <div><dt>รวมเป็นนาที</dt><dd class="js-total-minutes">0</dd></div>
+                <div><dt>รวมเป็นวินาที</dt><dd class="js-total-seconds">0</dd></div>
+            </dl>
+        </section>
+
+        <section class="card card-countdown" aria-labelledby="countdown-title">
+            <h2 id="countdown-title" class="card-title">
+                นับถอยหลังสู่วันครบรอบปีที่ <span class="js-next-year">11</span>
+            </h2>
+            <p class="card-sub js-next-date"></p>
+
+            <div class="clock clock-outline">
+                <div class="unit"><span class="num js-down-days">0</span><span class="label">วัน</span></div>
+                <div class="unit"><span class="num js-down-hours">00</span><span class="label">ชั่วโมง</span></div>
+                <div class="unit"><span class="num js-down-minutes">00</span><span class="label">นาที</span></div>
+                <div class="unit"><span class="num js-down-seconds">00</span><span class="label">วินาที</span></div>
+            </div>
+
+            <div class="progress" role="progressbar" aria-label="ความคืบหน้าสู่วันครบรอบถัดไป" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar"><span class="progress-fill"></span></div>
+                <p class="progress-text">ผ่านมาแล้ว <span class="js-progress">0</span>% ของปีที่ <span class="js-next-year">11</span></p>
+            </div>
+        </section>
+
+        <section class="closing">
+            <p class="closing-title">มานับปีที่ <span class="js-next-year">11</span> ไปด้วยกันนะ</p>
+            <p class="closing-sub">(และจะรักตลอดไป)</p>
+        </section>
+
+        <footer class="footer">
+            2016 – <span id="this-year">2026</span> · Really Love You ❤
+        </footer>
+    </div>
+
+    <noscript>
+        <p class="noscript">เปิด JavaScript เพื่อดูตัวนับเวลานะ ♥</p>
+    </noscript>
 
     <script src="js/site.js"></script>
 </body>

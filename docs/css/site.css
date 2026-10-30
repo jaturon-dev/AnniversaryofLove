@@ -1,186 +1,385 @@
-html {
-  font-size: 14px;
+/* ===== Anniversary of Love ===== */
+
+:root {
+    --bg: #fff6f3;
+    --ink: #4a2340;
+    --muted: #9b7a8c;
+    --rose: #e5487f;
+    --rose-deep: #c92f68;
+    --blush: #ffd9e6;
+    --blush-soft: #fff0f5;
+    --card: rgba(255, 255, 255, 0.78);
+    --line: rgba(229, 72, 127, 0.18);
+    --shadow: 0 18px 40px -18px rgba(201, 47, 104, 0.35);
+    --radius: 22px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-    text-align: center;
-    font-family: sans-serif;
-    font-weight: 100;
-    margin-bottom: 60px; /* เว้นที่ให้ footer ที่ติดล่างจอ */
-}
-
-.sriracha {
-    font-family: 'Sriracha', cursive;
-}
-
-.text-soft {
-    color: #B0B0B0;
-}
-
-.text-love {
-    color: #FF7BEB;
-}
-
-.countdown-caption {
-    color: #8a8a8a;
-    margin-bottom: 12px;
-}
-
-.celebrate {
-    margin-bottom: 16px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: #FFE6FA;
-    color: #D63AB9;
-    animation: celebrate-pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes celebrate-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .celebrate {
-        animation: none;
-    }
-}
-
-#happyNewYear-div {
-    font-family: sans-serif;
-    color: #fff;
-    display: inline-block;
-    font-weight: 100;
-    text-align: center;
-    font-size: 30px;
-}
-
-    #happyNewYear-div > div {
-        padding: 10px;
-        margin: 2px;
-        border-radius: 3px;
-        background: #FF7BEB;
-        display: inline-block;
-    }
-
-    #happyNewYear-div div > span {
-        padding: 15px;
-        border-radius: 3px;
-        background: #000000;
-        display: inline-block;
-        min-width: 2.2em;
-        font-variant-numeric: tabular-nums;
-    }
-
-.smalltext {
-    padding-top: 5px;
-    font-size: 16px;
-}
-
-/* จอมือถือ: ย่อกล่องนับถอยหลังให้อยู่ในบรรทัดเดียว */
-@media (max-width: 480px) {
-    #happyNewYear-div {
-        font-size: 20px;
-    }
-
-        #happyNewYear-div > div {
-            padding: 6px;
-        }
-
-        #happyNewYear-div div > span {
-            padding: 10px 6px;
-        }
-
-    .smalltext {
-        font-size: 12px;
-    }
-}
-
-/* ส่วน navbar/footer (เดิมมาจาก Bootstrap + _Layout.cshtml.css) */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
-    color: #212529;
+    min-height: 100vh;
+    font-family: 'Mali', sans-serif;
+    color: var(--ink);
+    text-align: center;
+    background:
+        radial-gradient(60rem 40rem at 10% -10%, #ffe1ec 0%, transparent 60%),
+        radial-gradient(50rem 36rem at 110% 20%, #ffe9dc 0%, transparent 55%),
+        radial-gradient(40rem 30rem at 50% 120%, #ffe1ec 0%, transparent 60%),
+        var(--bg);
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-.site-header {
-    border-bottom: 1px solid #e5e5e5;
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-    margin-bottom: 1rem;
-    padding: .5rem 1rem;
-    text-align: left;
+.page {
+    position: relative;
+    z-index: 1;
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding: 28px 18px 24px;
 }
 
-.site-brand {
-    font-size: 1.25rem;
-    color: rgba(0, 0, 0, .9);
-    text-decoration: none;
+/* ----- หัวใจลอยพื้นหลัง ----- */
+.hearts-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
 }
 
-main {
-    padding: 0 12px 1rem;
+.hearts-bg span {
+    position: absolute;
+    bottom: -40px;
+    color: var(--rose);
+    opacity: 0;
+    animation: float-up linear infinite;
 }
 
-h1 {
-    font-size: calc(1.375rem + 1.5vw);
-    font-weight: 500;
-    margin: 0 0 .5rem;
+@keyframes float-up {
+    0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10%  { opacity: var(--o, 0.25); }
+    90%  { opacity: var(--o, 0.25); }
+    100% { transform: translate(var(--drift, 30px), -110vh) rotate(25deg); opacity: 0; }
 }
 
-@media (min-width: 1200px) {
-    h1 {
-        font-size: 2.5rem;
-    }
+/* ----- แบนเนอร์วันครบรอบ ----- */
+.celebrate {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--rose), #ff8fb1);
+    color: #fff;
+    font-family: 'Sriracha', cursive;
+    font-size: 1.3rem;
+    box-shadow: var(--shadow);
+    animation: pop 1.6s ease-in-out infinite;
 }
 
-h2 {
-    font-size: calc(1.325rem + .9vw);
-    font-weight: 500;
+@keyframes pop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+}
+
+/* ----- Hero ----- */
+.hero {
+    padding: 12px 0 26px;
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+.hero-title {
     margin: 0;
+    line-height: 1;
+    font-weight: 700;
 }
 
-h4 {
-    font-size: calc(1.275rem + .3vw);
+.hero-number {
+    display: block;
+    font-size: clamp(5.5rem, 22vw, 9rem);
+    background: linear-gradient(160deg, #ff7aa6 0%, var(--rose) 45%, var(--rose-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 10px 18px rgba(229, 72, 127, 0.25));
+}
+
+.hero-unit {
+    display: block;
+    margin-top: 4px;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+}
+
+.hero-names {
+    margin: 18px 0 4px;
+    font-family: 'Sriracha', cursive;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+}
+
+.beat {
+    display: inline-block;
+    margin: 0 0.25em;
+    color: var(--rose);
+    animation: beat 1.2s ease-in-out infinite;
+}
+
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.18); }
+}
+
+.hero-since {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+}
+
+/* ----- การ์ด ----- */
+.card {
+    margin: 0 auto 18px;
+    padding: 26px 20px 24px;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.card-title {
+    margin: 0 0 4px;
+    font-family: 'Sriracha', cursive;
+    font-weight: 400;
+    font-size: clamp(1.35rem, 4.6vw, 1.7rem);
+    color: var(--ink);
+}
+
+.card-sub {
+    margin: 0 0 6px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* ----- นาฬิกา ----- */
+.clock {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 18px auto 0;
+    max-width: 560px;
+}
+
+.unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 6px 12px;
+    border-radius: 18px;
+}
+
+.num {
+    font-size: clamp(1.7rem, 7vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.label {
+    margin-top: 4px;
+    font-size: 0.85rem;
     font-weight: 500;
-    margin: 0 0 .5rem;
 }
 
-p {
-    margin: 0 0 1rem;
+.clock-filled .unit {
+    background: linear-gradient(165deg, #ff86ad 0%, var(--rose) 55%, var(--rose-deep) 100%);
+    color: #fff;
+    box-shadow: 0 10px 22px -12px rgba(201, 47, 104, 0.7);
 }
 
-.pt-3 {
-    padding-top: 1rem;
+.clock-filled .label {
+    color: rgba(255, 255, 255, 0.85);
 }
 
-.pt-5 {
-    padding-top: 3rem;
+.clock-outline .unit {
+    background: var(--blush-soft);
+    border: 1.5px solid var(--blush);
+    color: var(--rose-deep);
+}
+
+.clock-outline .label {
+    color: var(--muted);
+}
+
+.tick {
+    animation: tick 0.35s ease-out;
+}
+
+@keyframes tick {
+    0% { transform: translateY(-3px); opacity: 0.55; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ----- ยอดรวม ----- */
+.totals {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 20px 0 0;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+}
+
+.totals dt {
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.totals dd {
+    margin: 2px 0 0;
+    font-size: clamp(0.98rem, 3.4vw, 1.2rem);
+    font-weight: 700;
+    color: var(--rose-deep);
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+}
+
+/* ----- แถบความคืบหน้า ----- */
+.progress {
+    max-width: 560px;
+    margin: 20px auto 0;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--blush);
+    overflow: hidden;
+}
+
+.progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ff9dbd, var(--rose));
+    transition: width 0.6s ease;
+}
+
+.progress-text {
+    margin: 8px 0 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+/* ----- ปิดท้าย ----- */
+.closing {
+    padding: 26px 0 8px;
+}
+
+.closing-title {
+    margin: 0;
+    font-family: 'Sriracha', cursive;
+    font-size: clamp(1.9rem, 7.5vw, 2.8rem);
+    line-height: 1.3;
+    color: var(--rose);
+}
+
+.closing-sub {
+    margin: 4px 0 0;
+    color: var(--muted);
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px;
-    border-top: 1px solid #e5e5e5;
-    color: #6c757d;
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.noscript {
+    position: relative;
+    z-index: 1;
+    color: var(--muted);
 }
 
 [hidden] {
     display: none !important;
+}
+
+/* ----- มือถือ ----- */
+@media (max-width: 480px) {
+    .page {
+        padding: 20px 14px 20px;
+    }
+
+    .card {
+        padding: 22px 12px 20px;
+    }
+
+    .clock {
+        gap: 8px;
+    }
+
+    .unit {
+        padding: 12px 2px 10px;
+        border-radius: 14px;
+    }
+
+    .label {
+        font-size: 0.75rem;
+    }
+
+    /* ช่อง "วัน" มีตัวเลขยาวกว่าช่องอื่น */
+    .unit:first-child .num {
+        font-size: clamp(1.4rem, 6vw, 1.8rem);
+    }
+
+    .totals {
+        gap: 6px;
+    }
+
+    .totals dt {
+        font-size: 0.72rem;
+    }
+}
+
+/* ปิดแอนิเมชันสำหรับคนที่ตั้งค่าลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: reduce) {
+    .hearts-bg {
+        display: none;
+    }
+
+    .beat,
+    .celebrate,
+    .tick {
+        animation: none;
+    }
+
+    .progress-fill {
+        transition: none;
+    }
 }
